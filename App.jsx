@@ -11,10 +11,11 @@ export default function App() {
     }
 
     return (
-        <section id="dice-container">
+        <main id="dice-container">
             {diceArr.map((die, index) => {
                 return <Die key={index} value={die} />
             })}
-        </section>
+            
+        </main>
     )
 }
