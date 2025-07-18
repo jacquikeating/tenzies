@@ -1,12 +1,19 @@
+import { useState } from "react"
 import Die from "./Die.jsx"
 
 export default function App() {
-    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const [diceArr, setDiceArr] = useState(generateDice())
+
+    function generateDice() {
+        return new Array(10)
+            .fill(0)
+            .map(() => Math.ceil(Math.random() * 6))
+    }
 
     return (
         <section id="dice-container">
-            {nums.map((num) => {
-                return <Die key={num} value={(Math.floor(Math.random() * 6) + 1)} />
+            {diceArr.map((die, index) => {
+                return <Die key={index} value={die} />
             })}
         </section>
     )
