@@ -40,7 +40,7 @@ export default function App() {
                 })}
             </section>
 
-            <button className="roll-btn" onClick={() => setDiceArr(generateDice())}>Roll the dice!</button>
+            <button className="roll-btn" onClick={rollDice}>Roll the dice!</button>
         </main> 
     )
 }
