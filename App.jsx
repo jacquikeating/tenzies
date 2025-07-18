@@ -4,6 +4,8 @@ import Die from "./Die.jsx"
 export default function App() {
     const [diceArr, setDiceArr] = useState(generateDice())
 
+    let gameWon = diceArr.every(die => die.isHeld) && diceArr.every(die => die.value === diceArr[0].value)
+
     function generateDice() {
         return new Array(10)
             .fill(0)
@@ -45,7 +47,9 @@ export default function App() {
                 })}
             </section>
 
-            <button className="roll-btn" onClick={rollDice}>Roll the dice!</button>
+            <button className="roll-btn" onClick={rollDice}>
+                {gameWon ? "New Game" : "Roll the dice!"}
+            </button>
         </main> 
     )
 }
