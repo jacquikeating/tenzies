@@ -7,17 +7,18 @@ export default function App() {
     function generateDice() {
         return new Array(10)
             .fill(0)
-            .map(() => ({
+            .map((dieObject, index) => ({
                 value: Math.ceil(Math.random() * 6),
-                isHeld: false
+                isHeld: false,
+                id: index
             }))
     }
 
     return (
         <main>
             <section id="dice-container">
-                {diceArr.map((die, index) => {
-                    return <Die key={index} value={die.value} />
+                {diceArr.map((die) => {
+                    return <Die key={die.id} value={die.value} />
                 })}
             </section>
 
