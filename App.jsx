@@ -23,9 +23,13 @@ export default function App() {
     }
 
     function rollDice() {
-        setDiceArr(prevDiceArr => prevDiceArr.map(die =>
-            die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
+        if (gameWon) {
+            setDiceArr(generateDice())
+        } else {
+            setDiceArr(prevDiceArr => prevDiceArr.map(die =>
+                die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
         ))
+        }  
     }
 
     return (
