@@ -20,6 +20,12 @@ export default function App() {
         ))
     }
 
+    function rollDice() {
+        setDiceArr(prevDiceArr => prevDiceArr.map(die =>
+            die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
+        ))
+    }
+
     return (
         <main>
             <section id="dice-container">
