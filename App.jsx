@@ -18,7 +18,7 @@ export default function App() {
         <main>
             <section id="dice-container">
                 {diceArr.map((die) => {
-                    return <Die key={die.id} value={die.value} />
+                    return <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
                 })}
             </section>
 
