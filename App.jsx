@@ -11,11 +11,14 @@ export default function App() {
     }
 
     return (
-        <main id="dice-container">
-            {diceArr.map((die, index) => {
-                return <Die key={index} value={die} />
-            })}
-            
-        </main>
+        <main>
+            <section id="dice-container">
+                {diceArr.map((die, index) => {
+                    return <Die key={index} value={die} />
+                })}
+            </section>
+
+            <button className="roll-btn" onClick={() => setDiceArr(generateDice())}>Roll the dice!</button>
+        </main> 
     )
 }
