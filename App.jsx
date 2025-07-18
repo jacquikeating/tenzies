@@ -14,11 +14,23 @@ export default function App() {
             }))
     }
 
+    function holdDie(dieID) {
+        setDiceArr(prevDiceArr => prevDiceArr.map(die => 
+            die.id === dieID ? {...die, isHeld: !die.isHeld} : die
+        ))
+    }
+
     return (
         <main>
             <section id="dice-container">
                 {diceArr.map((die) => {
-                    return <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
+                    return <Die 
+                        key={die.id} 
+                        value={die.value} 
+                        isHeld={die.isHeld}
+                        id={die.id}
+                        holdDie={holdDie}
+                        />
                 })}
             </section>
 
