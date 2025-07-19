@@ -40,10 +40,8 @@ export default function App() {
                 {gameWon && <p>Congratulations! You won! Press "New Game" to start again.</p>}
             </div>
             
-            <section id="intro">
-                <h1 className="title">Tenzies</h1>
-                <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-            </section>
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             
             <section id="dice-container">
                 {diceArr.map((die) => {
