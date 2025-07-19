@@ -1,28 +1,29 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Die from "./Die.jsx";
 
 export default function App() {
-  const [diceArr, setDiceArr] = useState(generateDice());
+    const [diceArr, setDiceArr] = useState(generateDice());
+    const rollBtn = useRef(null)
 
-  let gameWon =
-    diceArr.every((die) => die.isHeld) &&
-    diceArr.every((die) => die.value === diceArr[0].value);
+    let gameWon =
+        diceArr.every((die) => die.isHeld) &&
+        diceArr.every((die) => die.value === diceArr[0].value);
 
-  function generateDice() {
-    return new Array(10).fill(0).map((dieObject, index) => ({
-      value: Math.ceil(Math.random() * 6),
-      isHeld: false,
-      id: index,
-    }));
-  }
+    function generateDice() {
+        return new Array(10).fill(0).map((dieObject, index) => ({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: index,
+        }));
+    }
 
-  function holdDie(dieID) {
-    setDiceArr((prevDiceArr) =>
-      prevDiceArr.map((die) =>
-        die.id === dieID ? { ...die, isHeld: !die.isHeld } : die
-      )
-    );
-  }
+    function holdDie(dieID) {
+        setDiceArr((prevDiceArr) =>
+        prevDiceArr.map((die) =>
+            die.id === dieID ? { ...die, isHeld: !die.isHeld } : die
+        )
+        );
+    }
 
     function rollDice() {
         if (gameWon) {
@@ -30,9 +31,12 @@ export default function App() {
         } else {
             setDiceArr(prevDiceArr => prevDiceArr.map(die =>
                 die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
-        ))
-        }  
+        ))}  
     }
+
+    useEffect(() => {
+        rollBtn.current.focus()
+    }, [gameWon])
 
     return (
         <main>
@@ -55,9 +59,9 @@ export default function App() {
                 })}
             </section>
 
-      <button className="roll-btn" onClick={rollDice}>
-        {gameWon ? "New Game" : "Roll the dice!"}
-      </button>
+            <button className="roll-btn" onClick={rollDice} ref={rollBtn}>
+                {gameWon ? "New Game" : "Roll the dice!"}
+            </button>
     </main>
   );
 }
