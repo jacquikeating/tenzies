@@ -1,26 +1,28 @@
-import { useState } from "react"
-import Die from "./Die.jsx"
+import { useState } from "react";
+import Die from "./Die.jsx";
 
 export default function App() {
-    const [diceArr, setDiceArr] = useState(generateDice())
+  const [diceArr, setDiceArr] = useState(generateDice());
 
-    let gameWon = diceArr.every(die => die.isHeld) && diceArr.every(die => die.value === diceArr[0].value)
+  let gameWon =
+    diceArr.every((die) => die.isHeld) &&
+    diceArr.every((die) => die.value === diceArr[0].value);
 
-    function generateDice() {
-        return new Array(10)
-            .fill(0)
-            .map((dieObject, index) => ({
-                value: Math.ceil(Math.random() * 6),
-                isHeld: false,
-                id: index
-            }))
-    }
+  function generateDice() {
+    return new Array(10).fill(0).map((dieObject, index) => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: index,
+    }));
+  }
 
-    function holdDie(dieID) {
-        setDiceArr(prevDiceArr => prevDiceArr.map(die => 
-            die.id === dieID ? {...die, isHeld: !die.isHeld} : die
-        ))
-    }
+  function holdDie(dieID) {
+    setDiceArr((prevDiceArr) =>
+      prevDiceArr.map((die) =>
+        die.id === dieID ? { ...die, isHeld: !die.isHeld } : die
+      )
+    );
+  }
 
     function rollDice() {
         if (gameWon) {
@@ -55,9 +57,9 @@ export default function App() {
                 })}
             </section>
 
-            <button className="roll-btn" onClick={rollDice}>
-                {gameWon ? "New Game" : "Roll the dice!"}
-            </button>
-        </main> 
-    )
+      <button className="roll-btn" onClick={rollDice}>
+        {gameWon ? "New Game" : "Roll the dice!"}
+      </button>
+    </main>
+  );
 }
