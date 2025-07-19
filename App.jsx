@@ -4,6 +4,7 @@ import Die from "./Die.jsx";
 
 export default function App() {
   const [diceArr, setDiceArr] = useState(generateDice());
+  const [rollCount, setRollCount] = useState(0);
   const rollBtn = useRef(null);
 
   let gameWon =
@@ -27,7 +28,9 @@ export default function App() {
   }
 
   function rollDice() {
+    setRollCount(rollCount + 1);
     if (gameWon) {
+      setRollCount(0);
       setDiceArr(generateDice());
     } else {
       setDiceArr((prevDiceArr) =>
@@ -35,6 +38,18 @@ export default function App() {
           die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
         )
       );
+    }
+  }
+
+  function generateRollText() {
+    if (!gameWon) {
+      return `Rolls: ${rollCount}`;
+    } else if (gameWon && rollCount < 11) {
+      return `You're a rockstar! You won with just ${rollCount} rolls!`;
+    } else if (gameWon && rollCount > 25) {
+      return `You got there in the end! You won with ${rollCount} rolls.`;
+    } else {
+      return `You won with ${rollCount} rolls!`;
     }
   }
 
@@ -70,6 +85,8 @@ export default function App() {
           );
         })}
       </section>
+
+      <span>{generateRollText()}</span>
 
       <button className="roll-btn" onClick={rollDice} ref={rollBtn}>
         {gameWon ? "New Game" : "Roll the dice!"}
