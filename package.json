@@ -1,6 +1,6 @@
 {
-  "name": "Scrim-s06j01j",
-  "description": "https://scrimba.com/frontend-path-c0j/~0ez/s0b8fhc0gg/head",
+  "name": "tenzies",
+  "description": "Scrimba React Tenzies",
   "scripts": {
     "start": "vite",
     "dev": "vite",
